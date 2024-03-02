@@ -1,31 +1,30 @@
 const loadData = async (isShowAll) => {
-   const res = await fetch('https://openapi.programming-hero.com/api/ai/tools')
-   const data = await res.json();
-   const allData = data.data.tools;
-//    console.log(allData)
-    displayPhones(allData, isShowAll)
-}
+  const res = await fetch("https://openapi.programming-hero.com/api/ai/tools");
+  const data = await res.json();
+  const allData = data.data.tools;
+  //    console.log(allData)
+  displayPhones(allData, isShowAll);
+};
 
 const displayPhones = (data, isShowAll) => {
-    // console.log(data)
-    const cardItem = document.getElementById('card-container')
-    const showAllBtn = document.getElementById('showAll-btn')
-    
-    if(data.length > 6 && !isShowAll){
-      showAllBtn.classList.remove('hidden')
-    }
-    else{
-      showAllBtn.classList.add('hidden')
-    }
+  // console.log(data)
+  const cardItem = document.getElementById("card-container");
+  const showAllBtn = document.getElementById("showAll-btn");
 
-    if(!isShowAll){
-      data = data.slice(0, 6)
-    }
+  if (data.length > 6 && !isShowAll) {
+    showAllBtn.classList.remove("hidden");
+  } else {
+    showAllBtn.classList.add("hidden");
+  }
 
-    data.forEach((item) => {
-        // console.log(item)
-        const createCard = document.createElement('div')
-        createCard.innerHTML = `
+  if (!isShowAll) {
+    data = data.slice(0, 6);
+  }
+
+  data.forEach((item) => {
+    // console.log(item)
+    const createCard = document.createElement("div");
+    createCard.innerHTML = `
         <div class="card w-80 bg-base-100 shadow-xl border-2 my-10">
         <figure class="p-6"><img class="rounded-2xl" src="${item.image}" /></figure>
         <div class="card-body">
@@ -41,18 +40,37 @@ const displayPhones = (data, isShowAll) => {
                 <h1 class="text-lg font-semibold">${item.name}</h1>
                 <p class="flex gap-1"><img src="./image/cal.png" alt="">${item.published_in}</p>
             </div>
-            <button class="rounded-full bg-[#FEF7F7] p-2"><img src="./image/arrow.png" alt=""></button>
+            <button onclick="showModal('${item.id}'); my_modal_5.showModal()" class="rounded-full bg-[#FEF7F7] p-2"><img src="./image/arrow.png" alt=""></button>
           </div>
         </div>
-        </div>
+        </div> 
         `;
-        cardItem.appendChild(createCard)
-    })
-}
+    cardItem.appendChild(createCard);
+  });
+};
 
 const handleShowAll = () => {
   loadData(true);
-}
+};
 
+const showModal = async (id) => {
+  // console.log(id)
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/ai/tool/${id}`
+  );
+  const data = await res.json();
+  const modalShow = data.data;
+  // console.log(modalShow)
+  modalData(modalShow);
+};
+
+const modalData = (modalCard) => {
+  const createModal = document.getElementById("create-modal");
+  const modalDiv = document.createElement("div");
+  
+  
+  
+  createModal.appendChild(modalDiv)
+};
 
 loadData();
