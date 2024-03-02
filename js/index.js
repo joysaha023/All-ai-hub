@@ -40,7 +40,7 @@ const displayPhones = (data, isShowAll) => {
                 <h1 class="text-lg font-semibold">${item.name}</h1>
                 <p class="flex gap-1"><img src="./image/cal.png" alt="">${item.published_in}</p>
             </div>
-            <button onclick="showModal('${item.id}'); my_modal_5.showModal()" class="rounded-full bg-[#FEF7F7] p-2"><img src="./image/arrow.png" alt=""></button>
+            <button onclick="showModal('${item.id}'); my_modal_4.showModal()" class="rounded-full bg-[#FEF7F7] p-2"><img src="./image/arrow.png" alt=""></button>
           </div>
         </div>
         </div> 
